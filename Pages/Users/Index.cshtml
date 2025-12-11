@@ -1,0 +1,25 @@
+﻿@page
+@model E_shopAutodily.Pages.Users.IndexModel
+@{
+}
+<h2>Seznam uživatelů</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Uživatelské jméno</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

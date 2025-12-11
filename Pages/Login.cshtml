@@ -1,0 +1,22 @@
+﻿@page
+@model E_shopAutodily.Pages.LoginModel
+@{
+    ViewData["Title"] = "Přihlášení";
+}
+
+<h2>Přihlášení uživatele</h2>
+
+<form method="post">
+    <div>
+        <label>Email:</label>
+        <input asp-for="Email" type="email" required />
+    </div>
+    <div>
+        <label>Heslo:</label>
+        <input asp-for="Password" type="password" required />
+    </div>
+    <button type="submit">Přihlásit se</button>
+</form>
+
+<p style="color:red">@ViewData["Error"]</p>
+<p style="color:green">@ViewData["Message"]</p>

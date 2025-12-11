@@ -1,0 +1,25 @@
+﻿@page
+@model E_shopAutodily.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Registrace";
+}
+
+<h2>Registrace uživatele</h2>
+
+<form method="post">
+    <div>
+        <label>Uživatelské jméno:</label>
+        <input asp-for="User.Username" required />
+    </div>
+    <div>
+        <label>Email:</label>
+        <input asp-for="User.Email" type="email" required />
+    </div>
+    <div>
+        <label>Heslo:</label>
+        <input asp-for="Password" type="password" required />
+    </div>
+    <button type="submit">Registrovat</button>
+</form>
+
+<p style="color:green">@ViewData["Message"]</p>
