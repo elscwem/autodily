@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Přidani Razor 
+// Razor Pages
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -23,6 +23,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// ❗ Identity NEPOUŽÍVÁME
 app.UseAuthorization();
 
 app.MapRazorPages();

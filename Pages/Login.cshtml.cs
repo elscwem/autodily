@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using E_shopAutodily.Data;
 using System.Security.Cryptography;
 using System.Text;
+using System.Linq;
 
 namespace E_shopAutodily.Pages
 {
@@ -16,6 +17,8 @@ namespace E_shopAutodily.Pages
         [BindProperty]
         public string Password { get; set; } = string.Empty;
 
+        public string Message { get; set; } = "";
+
         public LoginModel(AppDbContext context)
         {
             _context = context;
@@ -27,21 +30,22 @@ namespace E_shopAutodily.Pages
         {
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
-                ViewData["Error"] = "Vyplňte všechna pole.";
+                Message = "Vyplňte všechna pole.";
                 return Page();
             }
 
-            // Zahashujeme heslo a ověříme shodu s databází
             string passwordHash = ComputeSha256Hash(Password);
-            var user = _context.Users.FirstOrDefault(u => u.Email == Email && u.PasswordHash == passwordHash);
+
+            var user = _context.Users.FirstOrDefault(u =>
+                u.Email == Email && u.PasswordHash == passwordHash);
 
             if (user == null)
             {
-                ViewData["Error"] = "Nesprávný e-mail nebo heslo.";
+                Message = "Nesprávný e-mail nebo heslo.";
                 return Page();
             }
 
-            ViewData["Message"] = $"Vítej zpět, {user.Username}!";
+            Message = $"Vítej zpět, {user.Username}!";
             return Page();
         }
 
@@ -50,7 +54,8 @@ namespace E_shopAutodily.Pages
             using var sha256 = SHA256.Create();
             byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(rawData));
             var sb = new StringBuilder();
-            foreach (var b in bytes) sb.Append(b.ToString("x2"));
+            foreach (var b in bytes)
+                sb.Append(b.ToString("x2"));
             return sb.ToString();
         }
     }

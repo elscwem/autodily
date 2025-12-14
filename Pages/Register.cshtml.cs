@@ -5,57 +5,37 @@ using E_shopAutodily.Models;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace E_shopAutodily.Pages
+public class RegisterModel : PageModel
 {
-    public class RegisterModel : PageModel
+    private readonly AppDbContext _db;
+
+    public RegisterModel(AppDbContext db)
     {
-        private readonly AppDbContext _context;
+        _db = db;
+    }
 
-        [BindProperty]
-        public User User { get; set; } = new User();
+    [BindProperty] public string Username { get; set; } = "";
+    [BindProperty] public string Email { get; set; } = "";
+    [BindProperty] public string Password { get; set; } = "";
 
-        [BindProperty]
-        public string Password { get; set; } = string.Empty;
+    public string Message { get; set; } = "";
 
-        public RegisterModel(AppDbContext context)
+    public IActionResult OnPost()
+    {
+        var hash = SHA256.HashData(Encoding.UTF8.GetBytes(Password));
+        var passwordHash = Convert.ToHexString(hash);
+
+        var user = new User
         {
-            _context = context;
-        }
+            Username = Username,
+            Email = Email,
+            PasswordHash = passwordHash
+        };
 
-        public void OnGet() { }
+        _db.Users.Add(user);
+        _db.SaveChanges();
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            // Zkontrolujeme, zda už e-mail není použit
-            if (_context.Users.Any(u => u.Email == User.Email))
-            {
-                ModelState.AddModelError(string.Empty, "Tento e-mail je již registrován.");
-                return Page();
-            }
-
-            // Zahashujeme heslo a uložíme do PasswordHash
-            User.PasswordHash = ComputeSha256Hash(Password);
-
-            _context.Users.Add(User);
-            _context.SaveChanges();
-
-            ViewData["Message"] = "Registrace byla úspěšná!";
-            ModelState.Clear();
-            return Page();
-        }
-
-        private static string ComputeSha256Hash(string rawData)
-        {
-            using var sha256 = SHA256.Create();
-            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(rawData));
-            var sb = new StringBuilder();
-            foreach (var b in bytes) sb.Append(b.ToString("x2"));
-            return sb.ToString();
-        }
+        Message = "Registrace úspěšná";
+        return Page();
     }
 }
