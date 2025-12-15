@@ -5,37 +5,40 @@ using E_shopAutodily.Models;
 using System.Security.Cryptography;
 using System.Text;
 
-public class RegisterModel : PageModel
+namespace E_shopAutodily.Pages
 {
-    private readonly AppDbContext _db;
-
-    public RegisterModel(AppDbContext db)
+    public class RegisterModel : PageModel
     {
-        _db = db;
-    }
+        private readonly AppDbContext _db;
 
-    [BindProperty] public string Username { get; set; } = "";
-    [BindProperty] public string Email { get; set; } = "";
-    [BindProperty] public string Password { get; set; } = "";
-
-    public string Message { get; set; } = "";
-
-    public IActionResult OnPost()
-    {
-        var hash = SHA256.HashData(Encoding.UTF8.GetBytes(Password));
-        var passwordHash = Convert.ToHexString(hash);
-
-        var user = new User
+        public RegisterModel(AppDbContext db)
         {
-            Username = Username,
-            Email = Email,
-            PasswordHash = passwordHash
-        };
+            _db = db;
+        }
 
-        _db.Users.Add(user);
-        _db.SaveChanges();
+        [BindProperty] public string Username { get; set; } = "";
+        [BindProperty] public string Email { get; set; } = "";
+        [BindProperty] public string Password { get; set; } = "";
 
-        Message = "Registrace úspěšná";
-        return Page();
+        public string Message { get; set; } = "";
+
+        public IActionResult OnPost()
+        {
+            var hash = SHA256.HashData(Encoding.UTF8.GetBytes(Password));
+            var passwordHash = Convert.ToHexString(hash);
+
+            var user = new User
+            {
+                Username = Username,
+                Email = Email,
+                PasswordHash = passwordHash
+            };
+
+            _db.Users.Add(user);
+            _db.SaveChanges();
+
+            Message = "Registrace úspěšná";
+            return Page();
+        }
     }
 }

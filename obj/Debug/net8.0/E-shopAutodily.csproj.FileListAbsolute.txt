@@ -167,6 +167,3 @@ C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\obj\Debug\net8.0\refi
 C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\obj\Debug\net8.0\E-shopAutodily.pdb
 C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\obj\Debug\net8.0\E-shopAutodily.genruntimeconfig.cache
 C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\obj\Debug\net8.0\ref\E-shopAutodily.dll
-C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\bin\Debug\net8.0\E-shopAutodily.staticwebassets.endpoints.json
-C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Lenovo\source\repos\E-shopAutodily\E-shopAutodily\obj\Debug\net8.0\staticwebassets\msbuild.E-shopAutodily.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
