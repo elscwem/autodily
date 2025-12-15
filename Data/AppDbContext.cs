@@ -11,5 +11,14 @@ namespace E_shopAutodily.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderItem>()
+                .Property(o => o.Price)
+                .HasPrecision(18, 2);
+        }
+
     }
 }
