@@ -1,0 +1,28 @@
+﻿@page
+@model E_shopAutodily.Pages.MyOrdersModel
+
+<h2>Moje objednávky</h2>
+
+@if (!Model.Orders.Any())
+{
+    <p>Nemáte žádné objednávky.</p>
+}
+else
+{
+    <table border="1">
+        <tr>
+            <th>ID objednávky</th>
+            <th>Datum</th>
+            <th>Stav</th>
+        </tr>
+
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.CreatedAt</td>
+                <td>@order.Status</td>
+            </tr>
+        }
+    </table>
+}

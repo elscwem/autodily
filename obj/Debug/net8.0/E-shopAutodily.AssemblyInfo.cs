@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("E-shopAutodily")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+980e29fe1bfceac955552d364e25000f2c3428f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9cd502742e157cde807c7a1746a08cce9428617")]
 [assembly: System.Reflection.AssemblyProductAttribute("E-shopAutodily")]
 [assembly: System.Reflection.AssemblyTitleAttribute("E-shopAutodily")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
